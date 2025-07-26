@@ -15,6 +15,8 @@ form.onsubmit = e => {
     paragrafo: form.paragrafo.value,
     tags: form.tags.value,
     note: form.note.value,
+    data: form.data.value,
+    note: form.note.value,
     data: form.data.value
   };
   if (modificaIndice >= 0) {
@@ -44,6 +46,8 @@ function mostra() {
     f.paragrafo.toLowerCase().includes(ff('filtroParagrafo')) &&
     f.tags.toLowerCase().includes(ff('filtroTags')) &&
     f.note.toLowerCase().includes(ff('filtroNote')) &&
+    f.data.includes(document.getElementById("filtroData").value) &&
+    f.note.toLowerCase().includes(ff('filtroNote')) &&
     f.data.includes(document.getElementById("filtroData").value)
   );
   filtrati.forEach((f, i) => {
@@ -53,7 +57,7 @@ function mostra() {
       <blockquote>“${f.frase}”</blockquote>
       <small>${f.autore}, <em>${f.libro}</em></small>
       <div class="tags">Capitolo: ${f.capitolo || '-'}, Paragrafo: ${f.paragrafo || '-'}</div>
-      <div class="tags">Tag: ${f.tags}</div>
+      <div class="tags">Tag: ${f.tags}</div><div class="tags">Note: ${f.note || "-"}, Data: ${f.data || "-"}</div>
       <div class="tags">Note: ${f.note || "-"}, Data: ${f.data || "-"}</div>
       <div class="actions">
         <button onclick="modifica(${i})">Modifica</button>
@@ -72,6 +76,8 @@ function modifica(i) {
   form.capitolo.value = f.capitolo;
   form.paragrafo.value = f.paragrafo;
   form.tags.value = f.tags;
+  form.note.value = f.note || '';
+  form.data.value = f.data || '';
   form.note.value = f.note || '';
   form.data.value = f.data || '';
   modificaIndice = i;
@@ -94,6 +100,8 @@ function esporta() {
     f.capitolo.toLowerCase().includes(ff('filtroCapitolo')) &&
     f.paragrafo.toLowerCase().includes(ff('filtroParagrafo')) &&
     f.tags.toLowerCase().includes(ff('filtroTags')) &&
+    f.note.toLowerCase().includes(ff('filtroNote')) &&
+    f.data.includes(document.getElementById("filtroData").value) &&
     f.note.toLowerCase().includes(ff('filtroNote')) &&
     f.data.includes(document.getElementById("filtroData").value)
   );
