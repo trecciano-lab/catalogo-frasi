@@ -18,6 +18,8 @@
     <input id="capitolo" placeholder="Capitolo">
     <input id="paragrafo" placeholder="Paragrafo">
     <input id="tags" placeholder="Tag (separati da virgole)">
+    <input id="note" placeholder="Note (opzionale)">
+    <input id="data" type="date" placeholder="Data (opzionale)">
     <button type="submit">Salva</button>
   </form>
 
@@ -28,11 +30,15 @@
     <input id="filtroCapitolo" placeholder="Filtra per capitolo">
     <input id="filtroParagrafo" placeholder="Filtra per paragrafo">
     <input id="filtroTags" placeholder="Filtra per tag">
+    <input id="filtroNote" placeholder="Filtra per note">
+    <input id="filtroData" type="date">
+    <button type="button" onclick="mostra()">Visualizza</button>
     <button type="button" onclick="esporta()">Esporta CSV</button>
     <button type="button" onclick="window.print()">Stampa</button>
   </div>
 </div>
 
+<div id="conteggio"></div>
 <div id="lista"></div>
 
 <script src="script.js"></script>
