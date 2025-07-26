@@ -28,8 +28,6 @@ button:hover { background: #0056b3; }
   background: #6c757d; font-size: 0.8em;
 }
 .actions button:hover { background: #5a6268; }
-
-/* Stampa: nasconde il modulo e i filtri */
 @media print {
   #print-ignore { display: none; }
   .quote { page-break-inside: avoid; }

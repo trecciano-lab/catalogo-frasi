@@ -1,7 +1,6 @@
 
 let dati = JSON.parse(localStorage.getItem('frasi_libri') || '[]');
 let modificaIndice = -1;
-
 const form = document.getElementById('form');
 const lista = document.getElementById('lista');
 
@@ -14,8 +13,6 @@ form.onsubmit = e => {
     capitolo: form.capitolo.value,
     paragrafo: form.paragrafo.value,
     tags: form.tags.value,
-    note: form.note.value,
-    data: form.data.value,
     note: form.note.value,
     data: form.data.value
   };
@@ -36,8 +33,8 @@ function salva() {
 
 function mostra() {
   lista.innerHTML = '';
-  document.getElementById("conteggio").textContent = `Risultati trovati: ${filtrati.length}`;
   const ff = id => document.getElementById(id).value.toLowerCase();
+  const filtroData = document.getElementById("filtroData").value;
   const filtrati = dati.filter(f =>
     f.frase.toLowerCase().includes(ff('filtroFrase')) &&
     f.libro.toLowerCase().includes(ff('filtroLibro')) &&
@@ -46,10 +43,9 @@ function mostra() {
     f.paragrafo.toLowerCase().includes(ff('filtroParagrafo')) &&
     f.tags.toLowerCase().includes(ff('filtroTags')) &&
     f.note.toLowerCase().includes(ff('filtroNote')) &&
-    f.data.includes(document.getElementById("filtroData").value) &&
-    f.note.toLowerCase().includes(ff('filtroNote')) &&
-    f.data.includes(document.getElementById("filtroData").value)
+    (filtroData === '' || f.data === filtroData)
   );
+  document.getElementById("conteggio").textContent = `Risultati trovati: ${filtrati.length}`;
   filtrati.forEach((f, i) => {
     const div = document.createElement('div');
     div.className = 'quote';
@@ -57,8 +53,8 @@ function mostra() {
       <blockquote>“${f.frase}”</blockquote>
       <small>${f.autore}, <em>${f.libro}</em></small>
       <div class="tags">Capitolo: ${f.capitolo || '-'}, Paragrafo: ${f.paragrafo || '-'}</div>
-      <div class="tags">Tag: ${f.tags}</div><div class="tags">Note: ${f.note || "-"}, Data: ${f.data || "-"}</div>
-      <div class="tags">Note: ${f.note || "-"}, Data: ${f.data || "-"}</div>
+      <div class="tags">Tag: ${f.tags}</div>
+      <div class="tags">Note: ${f.note || '-'}, Data: ${f.data || '-'}</div>
       <div class="actions">
         <button onclick="modifica(${i})">Modifica</button>
         <button onclick="elimina(${i})">Elimina</button>
@@ -78,8 +74,6 @@ function modifica(i) {
   form.tags.value = f.tags;
   form.note.value = f.note || '';
   form.data.value = f.data || '';
-  form.note.value = f.note || '';
-  form.data.value = f.data || '';
   modificaIndice = i;
   window.scrollTo(0, 0);
 }
@@ -93,6 +87,7 @@ function elimina(i) {
 
 function esporta() {
   const ff = id => document.getElementById(id).value.toLowerCase();
+  const filtroData = document.getElementById("filtroData").value;
   const filtrati = dati.filter(f =>
     f.frase.toLowerCase().includes(ff('filtroFrase')) &&
     f.libro.toLowerCase().includes(ff('filtroLibro')) &&
@@ -101,13 +96,11 @@ function esporta() {
     f.paragrafo.toLowerCase().includes(ff('filtroParagrafo')) &&
     f.tags.toLowerCase().includes(ff('filtroTags')) &&
     f.note.toLowerCase().includes(ff('filtroNote')) &&
-    f.data.includes(document.getElementById("filtroData").value) &&
-    f.note.toLowerCase().includes(ff('filtroNote')) &&
-    f.data.includes(document.getElementById("filtroData").value)
+    (filtroData === '' || f.data === filtroData)
   );
-  let csv = 'Frase,Libro,Autore,Capitolo,Paragrafo,Tag\n';
+  let csv = 'Frase,Libro,Autore,Capitolo,Paragrafo,Tag,Note,Data\n';
   filtrati.forEach(f => {
-    csv += `"${f.frase.replace(/"/g, '""')}","${f.libro}","${f.autore}","${f.capitolo}","${f.paragrafo}","${f.tags}"\n`;
+    csv += `"${f.frase.replace(/"/g, '""')}","${f.libro}","${f.autore}","${f.capitolo}","${f.paragrafo}","${f.tags}","${f.note}","${f.data}"\n`;
   });
   const blob = new Blob([csv], { type: 'text/csv' });
   const link = document.createElement('a');
@@ -115,9 +108,3 @@ function esporta() {
   link.download = 'frasi_filtrate.csv';
   link.click();
 }
-
-
-mostra();
-
-document.getElementById("filtroNote").oninput = mostra;
-document.getElementById("filtroData").oninput = mostra;
