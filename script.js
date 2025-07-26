@@ -32,7 +32,7 @@ function salva() {
 
 function mostra() {
   lista.innerHTML = '';
-  const ff = i => document.getElementById(i).value.toLowerCase();
+  const ff = id => document.getElementById(id).value.toLowerCase();
   const filtrati = dati.filter(f =>
     f.frase.toLowerCase().includes(ff('filtroFrase')) &&
     f.libro.toLowerCase().includes(ff('filtroLibro')) &&
@@ -78,17 +78,25 @@ function elimina(i) {
 }
 
 function esporta() {
+  const ff = id => document.getElementById(id).value.toLowerCase();
+  const filtrati = dati.filter(f =>
+    f.frase.toLowerCase().includes(ff('filtroFrase')) &&
+    f.libro.toLowerCase().includes(ff('filtroLibro')) &&
+    f.autore.toLowerCase().includes(ff('filtroAutore')) &&
+    f.capitolo.toLowerCase().includes(ff('filtroCapitolo')) &&
+    f.paragrafo.toLowerCase().includes(ff('filtroParagrafo')) &&
+    f.tags.toLowerCase().includes(ff('filtroTags'))
+  );
   let csv = 'Frase,Libro,Autore,Capitolo,Paragrafo,Tag\n';
-  dati.forEach(f => {
+  filtrati.forEach(f => {
     csv += `"${f.frase.replace(/"/g, '""')}","${f.libro}","${f.autore}","${f.capitolo}","${f.paragrafo}","${f.tags}"\n`;
   });
   const blob = new Blob([csv], { type: 'text/csv' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  link.download = 'frasi.csv';
+  link.download = 'frasi_filtrate.csv';
   link.click();
 }
 
 document.querySelectorAll('.filters input').forEach(input => input.oninput = mostra);
-
 mostra();

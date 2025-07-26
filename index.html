@@ -10,25 +10,27 @@
 
 <h1>Catalogo Frasi da Libri</h1>
 
-<form id="form">
-  <textarea id="frase" placeholder="Frase" required></textarea>
-  <input id="libro" placeholder="Libro" required>
-  <input id="autore" placeholder="Autore" required>
-  <input id="capitolo" placeholder="Capitolo">
-  <input id="paragrafo" placeholder="Paragrafo">
-  <input id="tags" placeholder="Tag (separati da virgole)">
-  <button type="submit">Salva</button>
-</form>
+<div id="print-ignore">
+  <form id="form">
+    <textarea id="frase" placeholder="Frase" required></textarea>
+    <input id="libro" placeholder="Libro" required>
+    <input id="autore" placeholder="Autore" required>
+    <input id="capitolo" placeholder="Capitolo">
+    <input id="paragrafo" placeholder="Paragrafo">
+    <input id="tags" placeholder="Tag (separati da virgole)">
+    <button type="submit">Salva</button>
+  </form>
 
-<div class="filters">
-  <input id="filtroFrase" placeholder="Filtra per frase">
-  <input id="filtroLibro" placeholder="Filtra per libro">
-  <input id="filtroAutore" placeholder="Filtra per autore">
-  <input id="filtroCapitolo" placeholder="Filtra per capitolo">
-  <input id="filtroParagrafo" placeholder="Filtra per paragrafo">
-  <input id="filtroTags" placeholder="Filtra per tag">
-  <button onclick="esporta()">Esporta CSV</button>
-  <button onclick="window.print()">Stampa</button>
+  <div class="filters">
+    <input id="filtroFrase" placeholder="Filtra per frase">
+    <input id="filtroLibro" placeholder="Filtra per libro">
+    <input id="filtroAutore" placeholder="Filtra per autore">
+    <input id="filtroCapitolo" placeholder="Filtra per capitolo">
+    <input id="filtroParagrafo" placeholder="Filtra per paragrafo">
+    <input id="filtroTags" placeholder="Filtra per tag">
+    <button type="button" onclick="esporta()">Esporta CSV</button>
+    <button type="button" onclick="window.print()">Stampa</button>
+  </div>
 </div>
 
 <div id="lista"></div>
