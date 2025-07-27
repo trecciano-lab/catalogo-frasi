@@ -1,40 +1,12 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <title>Catalogo Frasi da Libri</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<h1>Catalogo Frasi da Libri</h1>
-<div id="print-ignore">
-  <form id="form">
-    <textarea id="frase" placeholder="Frase" required></textarea>
-    <input id="libro" placeholder="Libro" required>
-    <input id="autore" placeholder="Autore" required>
-    <input id="capitolo" placeholder="Capitolo">
-    <input id="paragrafo" placeholder="Paragrafo">
-    <input id="tags" placeholder="Tag (separati da virgole)">
-    <input id="note" placeholder="Note (opzionale)">
-    <input id="data" type="date" placeholder="Data (opzionale)">
-    <button type="submit">Salva</button>
-  </form>
-  <div class="filters">
-    <input id="filtroFrase" placeholder="Filtra per frase">
-    <input id="filtroLibro" placeholder="Filtra per libro">
-    <input id="filtroAutore" placeholder="Filtra per autore">
-    <input id="filtroCapitolo" placeholder="Filtra per capitolo">
-    <input id="filtroParagrafo" placeholder="Filtra per paragrafo">
-    <input id="filtroTags" placeholder="Filtra per tag">
-    <input id="filtroNote" placeholder="Filtra per note">
-    <input id="filtroData" type="date">
-    <button type="button" onclick="mostra()">Visualizza</button>
-    <button type="button" onclick="esporta()">Esporta CSV</button>
-    <button type="button" onclick="window.print()">Stampa</button>
-  </div>
-</div>
-<div id="conteggio"></div>
-<div id="lista"></div>
-<script src="script.js"></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Archivio Appunti</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
